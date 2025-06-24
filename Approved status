@@ -1,0 +1,86 @@
+wi.indAprvSt
+
+We'll use this indAprvSt (likely meaning Indent Approval Status) to determine whether the status is:
+
+Approved ✅
+
+Rejected ❌
+
+Pending ⌛
+
+
+
+---
+
+✅ 1. Update your test_2() Function:
+
+Inside the table cell where you show the status, replace this line:
+
+<b>Status</b><br>✅<br>Approved<br>
+
+with this:
+
+<b>Status</b><br>' . $this->getStatusIcon($indent['indAprvSt']) . '<br>' . $this->getStatusLabel($indent['indAprvSt']) . '<br>
+
+
+---
+
+🛠️ 2. Add Helper Functions to Your Controller
+
+Just add these two functions inside your controller:
+
+private function getStatusIcon($statusCode) {
+    switch ((int)$statusCode) {
+        case 50: // Approved
+            return '✅';
+        case 0:  // Pending
+            return '⌛';
+        case 40: // Rejected (example, adjust based on your logic)
+            return '❌';
+        default:
+            return '❓';
+    }
+}
+
+private function getStatusLabel($statusCode) {
+    switch ((int)$statusCode) {
+        case 50:
+            return 'Approved';
+        case 0:
+            return 'Pending';
+        case 40:
+            return 'Rejected';
+        default:
+            return 'Unknown';
+    }
+}
+
+> 💡 Note: Adjust the status codes (50, 0, 40) based on how your system encodes them.
+
+
+
+
+---
+
+🧪 Examples:
+
+If indAprvSt is:
+
+50 → ✅ Approved
+
+0 → ⌛ Pending
+
+40 → ❌ Rejected
+
+NULL or unknown → ❓ Unknown
+
+
+
+---
+
+If you're not sure what exact status codes are used for each condition, you can run this SQL to explore:
+
+SELECT DISTINCT indAprvSt FROM wis_indents ORDER BY indAprvSt;
+
+Let me know the results and I’ll help fine-tune the icon logic accordingly.
+
