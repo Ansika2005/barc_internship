@@ -76,11 +76,16 @@ NULL or unknown → ❓ Unknown
 
 
 
----
+$headerHTML = '
+<table cellpadding="1" cellspacing="0" style="text-align: center; width: 100%; font-size: 11pt;">
+    <tr><td><b>भारत सरकार /Government of India</b></td></tr>
+    <tr><td><b>भाभा परमाणु अनुसंधान केन्द्र /Bhabha Atomic Research Centre</b></td></tr>
+    <tr><td><b>नाभिकीय पुन: चक्रण बोर्ड /Nuclear Recycle Board</b></td></tr>
+    <tr><td><b>एकीकृत नाभिकीय पुन: चक्रण संयंत्र (प्रचालन)/Integrated Nuclear Recycling Plant (Operations)</b></td></tr>
+    <tr><td><b>तारापुर /TARAPUR</b></td></tr>
+</table>
+<br><div style="text-align: right; font-size: 10pt;"><b>Data from <u>' . date("Y-m-d", strtotime($stDate)) . '</u> to <u>' . date("Y-m-d", strtotime($endDate)) . '</u></b></div>
+<br><hr>
+';
 
-If you're not sure what exact status codes are used for each condition, you can run this SQL to explore:
-
-SELECT DISTINCT indAprvSt FROM wis_indents ORDER BY indAprvSt;
-
-Let me know the results and I’ll help fine-tune the icon logic accordingly.
-
+$pdff->writeHTML($headerHTML, true, false, true, false, '');
